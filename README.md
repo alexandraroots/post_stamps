@@ -16,17 +16,19 @@
 ```
 pip install -r requirements.txt
 ```
-Запуск на данных
+
+## Classic CV
+
+| Anchor/Positive        | Anchor/Negative 
+| ------------- |------------------|
+|<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_orig_8.png" width="1200"> | <img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_8.png" width="1200"> 
+
 ```
 # положить изображения в папку data/marks (временно, исправить на подавать паппку в аргументах)
 python main.py
 ```
 
-| Model          | Описание        | Metric Value |Производительность на 1 изображении|
-| ------------- |------------------| -----|-----|
-| Classic CV | ORB keypoints + crop + ssim                              ||
-| Neural CV |  MetricLearning   | ||
-
+## Neural CV
 Напришивается метрическое обучение (metric learning) и triplet loss
 
 
@@ -34,6 +36,10 @@ python main.py
 | ------------- |------------------| -----|
 |<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/anchor.png" width="1200"> | <img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/positive.png" width="1200"> |<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/negative.png" width="1200">
 
-| Anchor/Positive        | Anchor/Negative 
-| ------------- |------------------|
-|<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_orig_8.png" width="1200"> | <img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_8.png" width="1200"> 
+
+### Результаты
+
+| Model          | Описание        | Metric Value |Производительность на 1 изображении|
+| ------------- |------------------| -----|-----|
+| Classic CV | ORB keypoints + crop + ssim                              ||
+| Neural CV |  MetricLearning   | ||
