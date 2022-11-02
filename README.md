@@ -17,7 +17,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-| Model          | Описание                    | Metric Value |
-| ------------- |------------------| -----|
-| Classic CV | ORB keypoints + crop + ssim                              |
-| Neural CV |  ReID   | |
+| Model          | Описание        | Metric Value |Производительность на 1 изображении|
+| ------------- |------------------| -----|-----|
+| Classic CV | ORB keypoints + crop + ssim                              ||
+| Neural CV |  ReID   | ||
