@@ -29,6 +29,11 @@ python main.py
 
 Напришивается метрическое обучение (metric learning) и triplet loss
 
+
 | Anchor         | Positive                  | Negative |
 | ------------- |------------------| -----|
-|  |                           |
+|<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/anchor.png" width="1200"> | <img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/positive.png" width="1200"> |<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/images/negative.png" width="1200">
+
+| Anchor/Positive        | Anchor/Negative 
+| ------------- |------------------|
+|<img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_orig_8.png" width="1200"> | <img src="https://github.com/alexandraroots/post_stamps/raw/master/data/diff/diff_8.png" width="1200"> 
