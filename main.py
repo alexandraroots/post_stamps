@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
         crop_1, crop_2 = image_registration(img_1, img_2)
 
-        diff = diff_image(crop_1, crop_2)
+        diff, score = diff_image(crop_1, crop_2)
 
         cv2.imwrite(f"data/diff/diff_{i}.png", diff)
 
@@ -27,6 +27,6 @@ if __name__ == "__main__":
 
         crop_1, crop_2 = image_registration(img_1, img_2)
 
-        diff = diff_image(crop_1, crop_2)
+        diff, score = diff_image(crop_1, crop_2)
 
         cv2.imwrite(f"data/diff/diff_orig_{i}.png", diff)

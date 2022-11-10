@@ -2,13 +2,13 @@ import cv2
 import numpy as np
 
 
-def image_registration(img_1_clr, img_2_clr):
+def image_registration(img_1_clr, img_2_clr, n=15000):
     img_1 = cv2.cvtColor(img_1_clr, cv2.COLOR_BGR2GRAY)
     img_2 = cv2.cvtColor(img_2_clr, cv2.COLOR_BGR2GRAY)
     height, width = img_2.shape
 
     # ORB detector
-    orb_detector = cv2.ORB_create(15000)
+    orb_detector = cv2.ORB_create(n)
 
     kp1, d1 = orb_detector.detectAndCompute(img_1, None)
     kp2, d2 = orb_detector.detectAndCompute(img_2, None)

@@ -1,19 +1,18 @@
 import cv2
+import imutils as imutils
 import numpy as np
 from skimage.metrics import structural_similarity as compare_ssim
 from tqdm import tqdm
 
-import imutils as imutils
 
-
-def vanilla_crop(img, thresh):
+def vanilla_crop(img, thresh, n=13):
     hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     s = hsv_img[:, :, 1]
 
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(5, 5))
     equ = clahe.apply(s)
 
-    equ = cv2.GaussianBlur(equ, (13, 13), 0)
+    equ = cv2.GaussianBlur(equ, (n, n), 0)
 
     im_b = cv2.threshold(equ, thresh, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
     im_b = cv2.erode(im_b, None, iterations=2)
@@ -80,10 +79,7 @@ def crop_stamps(img, thresh=120):
     return scan
 
 
-def findHomography(img1, img2):
-    MIN_MATCH_COUNT = 10
-    MIN_DIST_THRESHOLD = 0.9
-    RANSAC_REPROJ_THRESHOLD = 5.0
+def findHomography(img1, img2, MIN_MATCH_COUNT = 10, MIN_DIST_THRESHOLD = 0.9, RANSAC_REPROJ_THRESHOLD = 5.0):
 
     sift = cv2.SIFT_create()
 
@@ -109,17 +105,17 @@ def findHomography(img1, img2):
         return H
 
 
-def resize_stamps(img_1, img_2):
-    crop_1 = crop_stamps(img_1)
-    crop_2 = crop_stamps(img_2)
+def resize_stamps(img_1, img_2, thresh=120, MIN_MATCH_COUNT=10, MIN_DIST_THRESHOLD=0.9):
+    crop_1 = crop_stamps(img_1, thresh)
+    crop_2 = crop_stamps(img_2, thresh)
 
-    H = findHomography(crop_1, crop_2)
+    H = findHomography(crop_1, crop_2, MIN_MATCH_COUNT=MIN_MATCH_COUNT, MIN_DIST_THRESHOLD=MIN_DIST_THRESHOLD)
     crop_1 = cv2.warpPerspective(crop_1, H, (crop_2.shape[1], crop_2.shape[0]))
 
     return crop_1, crop_2
 
 
-def diff_image(img_1, img_2, n=7):
+def diff_image(img_1, img_2, thresh=100):
 
     gray_a = cv2.cvtColor(img_1, cv2.COLOR_BGR2GRAY)
     gray_a = cv2.bilateralFilter(gray_a, 50, 17, 17)
@@ -130,18 +126,18 @@ def diff_image(img_1, img_2, n=7):
     (score, diff) = compare_ssim(gray_a, gray_b, full=True)
     diff = (diff * 255).astype("uint8")
 
-    thresh = 100
     diff = cv2.threshold(diff, thresh, 255, cv2.THRESH_BINARY)[1]
 
-    return diff
+    return diff, score
 
 
 if __name__ == "__main__":
     for i in tqdm(range(1, 8), position=0, leave=True):
         img_1 = cv2.imread(f"data/marks/orig_{i}.png", 1)
+        print(img_1.shape)
         img_2 = cv2.imread(f"data/marks/fake_{i}.png", 1)
 
-        crop_1, crop_2 = resize_stamps(img_1, img_2)
+        crop_1, crop_2 = resize_stamps(img_1, img_2, thresh=120, MIN_MATCH_COUNT=10, MIN_DIST_THRESHOLD=0.9)
 
         cv2.imwrite(f"data/marks_v1/orig_{i}.png", crop_1)
         cv2.imwrite(f"data/marks_v1/fake_{i}.png", crop_2)
