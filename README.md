@@ -12,7 +12,7 @@
     
 *но* обычно есть данные о марках из энциклопедий и справочников и есть понимание, как выглядит оригинал
 
-Заупск
+### Запуск
 ```
 git clone https://github.com/alexandraroots/post_stamps.git
 docker build . -t main
