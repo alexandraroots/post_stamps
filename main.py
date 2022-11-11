@@ -7,8 +7,8 @@ from image_registration import image_registration
 if __name__ == "__main__":
     # fake/origin
     for i in tqdm(range(1, 10)):
-        path_1 = f"data/marks/fake_{i}.png"
-        path_2 = f"data/marks/orig_{i}.png"
+        path_1 = f"marks/fake_{i}.png"
+        path_2 = f"marks/orig_{i}.png"
         img_1 = cv2.imread(path_1)
         img_2 = cv2.imread(path_2)
 
@@ -20,8 +20,8 @@ if __name__ == "__main__":
 
     # origin/origin
     for i in tqdm(range(5, 10)):
-        path_1 = f"data/marks/orig_{i}.png"
-        path_2 = f"data/marks/orig_{i}_2.png"
+        path_1 = f"marks/orig_{i}.png"
+        path_2 = f"marks/orig_{i}_2.png"
         img_1 = cv2.imread(path_1)
         img_2 = cv2.imread(path_2)
 

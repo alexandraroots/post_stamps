@@ -12,9 +12,11 @@
     
 *но* обычно есть данные о марках из энциклопедий и справочников и есть понимание, как выглядит оригинал
 
-Установка заивисмостей
+Заупск
 ```
-pip install -r requirements.txt
+git clone https://github.com/alexandraroots/post_stamps.git
+docker build . -t main
+docker run main
 ```
 
 ## Classic CV
